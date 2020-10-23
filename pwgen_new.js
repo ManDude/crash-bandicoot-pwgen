@@ -38,13 +38,25 @@ var levelDataENG = [
 //               circle    square       x     triangle
 var padchars = ["\u25EF", "\u25FB", "\u2715", "\u25B3"];
 function stringify(code) {
-    var s = '';
-    for (var i = 0; i < code.length; i++) {
-        if (i == 8 || i == 16)
-            s += "\n"
-        s += padchars[code[i]];
-    }
-    return s;
+	var s = '<table><tbody>';
+	for (var i = 0; i < code.length; ++i) {
+		if (i % 8 == 0) {
+			if (i > 0) {
+				s += '</tr>';
+			}
+			s += '<tr>';
+		}
+		s += '<td style="'
+		switch (code[i]) {
+			case 0: s += "background: linear-gradient(#ff0000, #800000); -webkit-background-clip: text;"; break;
+			case 1: s += "background: linear-gradient(#ff80c4, #804062); -webkit-background-clip: text;"; break;
+			case 2: s += "background: linear-gradient(#8080ff, #404080); -webkit-background-clip: text;"; break;
+			case 3: s += "background: linear-gradient(#40ff40, #208020); -webkit-background-clip: text;"; break;
+		}
+		s += '">'+padchars[code[i]]+'</td>';
+	}
+	s += '</tbody></table>';
+	return s;
 }
 
 var forcesuper = false;

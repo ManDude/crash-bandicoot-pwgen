@@ -8,6 +8,18 @@
 	h1 {
 		line-height: 0.7em;
 	}
+	td {
+		text-align: center;
+		font-weight: 1000;
+		font-size: 120%;
+		padding: 0;
+		-webkit-text-fill-color: transparent;
+		text-fill-color: transparent;
+	}
+	tbody tr td
+	{
+		width: 1.125em;
+	}
 	</style>
 	<head style="text-align: center;">
 		<title>Crash Bandicoot Password Generator (2020 Epic Edition)</title>
@@ -57,7 +69,7 @@
 			
 			if (levels != oldlevels || keys != oldkeys || gems != oldgems) {
 				var password = makePassword(levels, keys, gems);
-				document.getElementById('outcode').textContent = stringify(typePassword(password));
+				document.getElementById('outcode').innerHTML = stringify(typePassword(password));
 				oldlevels = levels;
 				oldkeys = keys;
 				oldgems = gems;
@@ -81,7 +93,7 @@
 		<p></p>
         <!-- <button onclick="generate()">Generate</button> -->
 		<input type="checkbox" id="force-super" onclick="forcesuper = this.checked; oldlevels = -1;" /><label for="force-super"> Force Super Password output</label><br />
-		<pre id="outcode"></pre>
+		<div id="outcode"></div>
         <button onclick="selectGems(true)">Select all gems</button>
         <button onclick="selectGems(false)">Select no gems</button>
 		<hr/>
