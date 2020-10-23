@@ -18,7 +18,6 @@
 			for (var i = 0; i < inputs.length; ++i)
 				inputs[i].checked = selected;
 		}
-
 		function makepage() {
 			var levels = levelDataENG;
 			for (var i = 0; i < 31; ++i) {
@@ -35,8 +34,9 @@
 				}
 			}
 			generate()
-			setInterval(generate, 25)
+			setInterval(generate, 20)
 		}
+		var oldlevels = -1, oldkeys = -1, oldgems = -1;
 		function generate() {
 			var levels = 0
 			var keys = 0;
@@ -55,9 +55,13 @@
 				}
 			}
 			
-			var password = makePassword(levels, keys, gems);
-		
-			document.getElementById('outcode').textContent = stringify(typePassword(password));
+			if (levels != oldlevels || keys != oldkeys || gems != oldgems) {
+				var password = makePassword(levels, keys, gems);
+				document.getElementById('outcode').textContent = stringify(typePassword(password));
+				oldlevels = levels;
+				oldkeys = keys;
+				oldgems = gems;
+			}
 		}
 		</script>
 		<h1>Crash Bandicoot Password Generator</h1>
@@ -76,7 +80,7 @@
 		</div>
 		<p></p>
         <!-- <button onclick="generate()">Generate</button> -->
-		<input type="checkbox" id="force-super" onclick="forcesuper = this.checked" /> Force Super Password output<br />
+		<input type="checkbox" id="force-super" onclick="forcesuper = this.checked; oldlevels = -1;" /> Force Super Password output<br />
 		<pre id="outcode"></pre>
         <button onclick="selectGems(true)">Select all gems</button>
         <button onclick="selectGems(false)">Select no gems</button>
